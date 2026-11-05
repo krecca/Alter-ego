@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALTER EGO.exe</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #58ff9b;
+    --dark-green: #123c25;
+    --black: #020805;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--black);
+    color: var(--green);
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 3px,
+        rgba(65,255,130,.045) 4px
+    );
+    z-index: 10;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 100px #000;
+    z-index: 11;
+}
+
+header {
+    height: 65px;
+    border-bottom: 1px solid var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    background: #06120a;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-shadow: 0 0 12px var(--green);
+}
+
+.status {
+    font-size: 12px;
+}
+
+.status span {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.container {
+    height: calc(100vh - 65px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.character {
+    width: 175px;
+    height: 175px;
+    margin: 10px auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 3s infinite;
+}
+
+.character img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    filter: drop-shadow(0 0 12px #32ff80);
+}
+
+@keyframes pulse {
+    50% {
+        filter: brightness(1.2);
+    }
+}
+
+.name {
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 6px;
+    margin: 5px;
+    text-shadow: 0 0 15px var(--green);
+}
+
+.subtitle {
+    font-size: 11px;
+    color: #80bd98;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.chat {
+    width: 100%;
+    max-width: 750px;
+    flex: 1;
+    min-height: 100px;
+    border: 1px solid var(--dark-green);
+    background: rgba(3, 17, 8, .9);
+    padding: 15px;
+    overflow-y: auto;
+    box-shadow: 0 0 15px #092512;
+}
+
+.message {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.user {
+    color: #d5ffe3;
+}
+
+.ai {
+    color: var(--green);
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.input-area {
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    margin-top: 12px;
+    border: 1px solid var(--green);
+    background: #06120a;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 15px;
+    color: var(--green);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #477957;
+}
+
+button {
+    border: none;
+    background: var(--green);
+    color: #001b09;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: white;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+.new-chat {
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid var(--dark-green);
+    color: var(--green);
+    padding: 9px 15px;
+}
+
+.footer {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #477957;
+    text-align: center;
+}
+
+@media(max-width: 500px) {
+
+    .logo {
+        font-size: 17px;
+        letter-spacing: 3px;
+    }
+
+    .character {
+        width: 135px;
+        height: 135px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">ALTER EGO.exe</div>
+
+    <div class="status">
+        <span>●</span> SYSTEM ONLINE
+    </div>
+
+</header>
+
+<main class="container">
+
+    <div class="character">
+
+        <img
+            src="assets/alterego.png"
+            alt="Alter Ego de Danganronpa"
+        >
+
+    </div>
+
+    <h1 class="name">ALTER EGO</h1>
+
+    <div class="subtitle">
+        ARTIFICIAL INTELLIGENCE SYSTEM // VERSION 1.0
+    </div>
+
+    <section class="chat" id="chat">
+
+        <div class="message ai">
+
+            <div class="label">[ ALTER EGO ]</div>
+
+            Olá! Sistema inicializado com sucesso.
+
+            Estou pronto para conversar.
+
+            O que você gostaria de saber?
+
+        </div>
+
+    </section>
+
+    <div class="input-area">
+
+        <input
+            id="input"
+            type="text"
+            placeholder="Digite sua mensagem..."
+            autocomplete="off"
+        >
+
+        <button id="sendButton" onclick="sendMessage()">
+            SEND
+        </button>
+
+    </div>
+
+    <button class="new-chat" onclick="newChat()">
+        [ NEW SESSION ]
+    </button>
+
+    <div class="footer">
+        ALTER EGO PROJECT // DIGITAL CONSCIOUSNESS
+    </div>
+
+</main>
+
+<script>
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const sendButton = document.getElementById("sendButton");
+
+function addMessage(name, text, type) {
+
+    const message = document.createElement("div");
+    message.className = "message " + type;
+
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = "[ " + name + " ]";
+
+    const content = document.createElement("div");
+    content.textContent = text;
+
+    message.appendChild(label);
+    message.appendChild(content);
+
+    chat.appendChild(message);
+
+    chat.scrollTop = chat.scrollHeight;
+
+}
+
+async function sendMessage() {
+
+    const text = input.value.trim();
+
+    if (!text || sendButton.disabled) return;
+
+    addMessage("YOU", text, "user");
+
+    input.value = "";
+    sendButton.disabled = true;
+    sendButton.textContent = "WAIT...";
+
+    try {
+
+        const response = await fetch("/chat", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: text
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Erro no servidor");
+        }
+
+        addMessage(
+            "ALTER EGO",
+            data.reply,
+            "ai"
+        );
+
+    } catch (error) {
+
+        addMessage(
+            "SYSTEM",
+            "Não consegui conectar ao servidor. Verifique se ele está online.",
+            "ai"
+        );
+
+        console.error(error);
+
+    } finally {
+
+        sendButton.disabled = false;
+        sendButton.textContent = "SEND";
+        input.focus();
+
+    }
+
+}
+
+function newChat() {
+
+    chat.innerHTML = "";
+
+    addMessage(
+        "ALTER EGO",
+        "Nova sessão iniciada. Olá novamente!",
+        "ai"
+    );
+
+}
+
+input.addEventListener("keydown", event => {
+
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
